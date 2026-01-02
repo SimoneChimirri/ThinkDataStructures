@@ -1,8 +1,29 @@
-package BasiDiJava;
-
 public class StringFunctions {
-    public static void main(String[] args){
-        String s = "Java programming language";
+   // Listing 1.2
+   public static int count(String s, String target) {
+      int count = 0;
+      int n = target.length();
+      for (int i = 0; i <= s.length() - n; i++) {
+         String piece = s.substring(i, i + n);
+         if (piece.equals(target)) count++;
+      }
+      return count;
+   }
+   
+   // Listing 1.4
+   public static String acronym(String phrase) {
+      StringBuilder result = new StringBuilder();
+      for (String token : phrase.split("\\s+")) {
+         result.append(token.toUpperCase().charAt(0));
+      }
+      return result.toString();
+   }
+   
+   public static void main(String[] args) {
+      System.out.println("Number of this's: " +
+         count("this and this and that and this", "this"));
+
+      String s = "Java programming language";
         System.out.println(s.length());
         System.out.println(s.charAt(2));
         System.out.println(s.substring(2,5));
@@ -14,9 +35,9 @@ public class StringFunctions {
         System.out.println(countWord(s,"java"));
         System.out.println(countWordIgnoreCase(s,"java"));
         System.out.println(reverse(s));
-    }
+   }
 
-    /**
+   /**
      * Counts the occurrences of a given word in a phrase.
      * @param s a given word
      * @param target a given phrase
@@ -56,6 +77,4 @@ public class StringFunctions {
         }
         return builder.toString();
     }
-
-
 }

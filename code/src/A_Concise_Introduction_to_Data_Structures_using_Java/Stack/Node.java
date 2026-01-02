@@ -1,0 +1,1 @@
+// Listing 3.3public class Node {   private int data;   private Node next;      public Node(int data, Node next) {      this.data = data;      this.next = next;   }}/*Generic version for Listing 4.1public class Node<T> {   private T data;   private Node<T> next;      public Node(T data, Node<T> next) {      this.data = data;      this.next = next;   }}*/

@@ -1,5 +1,3 @@
-package BasiDiJava;
-
 public class Button {
 
     private String label;
