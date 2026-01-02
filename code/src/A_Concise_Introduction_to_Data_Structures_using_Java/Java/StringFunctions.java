@@ -18,10 +18,71 @@ public class StringFunctions {
       }
       return result.toString();
    }
+
+   /**
+    * Generates the acronym of a given phrase.
+    * @param phrase - the given phrase
+    * @return the acronym
+    */
+   public static String acronym2(String phrase) {
+      StringBuilder result = new StringBuilder();
+      for (int i =0; i < phrase.split("\\s+").length; i++) {
+         result.append(phrase.split("\\s+")[i].toUpperCase().charAt(0));
+      }
+      return result.toString();
+   }
+
+   /**
+    * Counts the occurrences of a target string
+    * in a given string, ignoring case.
+    * @param s - the given string
+    * @param target - the target string
+    * @return the number of occurrences
+    */
+   public static int countIgnoreCase(String s, String target) {
+      int count = 0;
+      int n = target.length();
+      for (int i = 0; i <= s.length() - n; i++) {
+         String piece = s.substring(i, i + n);
+         if (piece.equalsIgnoreCase(target)) count++;
+      }
+      return count;
+   }
+
+   /**
+    * Counts the occurrences of a target string
+    * in a given string using a while loop and 
+    * string method indexOf.
+    * @param s - the given string
+    * @param target - the target string
+    * @return the number of occurrences
+    */
+   public static int count2(String s, String target) {
+      int count = 0;
+      int i = 0;
+      int n = target.length();
+      while(n <= s.length()) {
+         int index = s.indexOf(target, i);
+         if (index == -1) break;
+         count++;
+         s = s.substring(index + n);
+         i = index + n;
+      }
+      return count;
+   }
    
    public static void main(String[] args) {
       System.out.println("Number of this's: " +
          count("this and this and that and this", "this"));
+      System.out.println("Number of this's: " +
+         countIgnoreCase("This and this and that and This", "this"));
+      System.out.println("Number of this's: " +
+         count2("this and this and that and this", "this"));
+
+      System.out.println("Acronym of 'As Soon As Possible': " +
+         acronym("As Soon As Possible"));
+         System.out.println("Acronym of 'As Soon As Possible': " +
+         acronym2("As Soon As Possible"));
 
       String s = "Java programming language";
         System.out.println(s.length());
@@ -39,8 +100,8 @@ public class StringFunctions {
 
    /**
      * Counts the occurrences of a given word in a phrase.
-     * @param s a given word
-     * @param target a given phrase
+     * @param s - a given word
+     * @param target - a given phrase
      * @return the number of occurrences
      */
     public static int countWord(String s, String target){
@@ -53,8 +114,8 @@ public class StringFunctions {
 
     /**
      * Counts the occurrences of a given word in a phrase, ignoring case.
-     * @param s a given word
-     * @param target a given phrase
+     * @param s - a given word
+     * @param target - a given phrase
      * @return the number of occurrences
      */
     public static int countWordIgnoreCase(String s, String target){
@@ -67,7 +128,7 @@ public class StringFunctions {
 
     /**
      * Reverses the order of characters in a given string.
-     * @param s a given string
+     * @param s - a given string
      * @return the string reversed
      */
     public static String reverse(String s){
