@@ -1,4 +1,4 @@
-public class ArrayQueue<E> implements Queue<E> {
+public class ArrayQueue<E> implements Queue1<E> {
 
     @Override
     public void enqueue(E e) {
@@ -9,9 +9,8 @@ public class ArrayQueue<E> implements Queue<E> {
     public E dequeue() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
     public static void main(String[] args) {
-        Queue<String> q = new ArrayQueue<>();
+        Queue1<String> q = new ArrayQueue<>();
     }
     
 }

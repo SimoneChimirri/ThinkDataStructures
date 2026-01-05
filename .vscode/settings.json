@@ -5,5 +5,18 @@
     "path": "C:\\Program Files\\Jdk\\oracleJdk-25",
     "default": true
   }
-]
+],
+"java.project.sourcePaths": [
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Tree",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Stack",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Recursion",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Queue",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/List",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Java",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava/Ch1_BasiDiJava",
+  "code/src/AConciseIntroductionToDataStructuresUsingJava"
+],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
