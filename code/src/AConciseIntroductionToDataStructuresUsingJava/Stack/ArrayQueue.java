@@ -1,4 +1,4 @@
-public class ArrayQueue implements Queue{
+public class ArrayQueue implements Queue2{
 
     @Override
     public void enqueue(int n) {

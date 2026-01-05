@@ -1,4 +1,4 @@
-public interface Queue {
+public interface Queue2{
 
     public void enqueue(int n);
 

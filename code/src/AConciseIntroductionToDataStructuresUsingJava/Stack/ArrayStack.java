@@ -1,29 +1,35 @@
+import java.util.EmptyStackException;
+
 public class ArrayStack<E> implements Stack<E> {
    private E[] data;
-   private int top = -1;
    private int size;
    private static final int DEFAULT_CAPACITY = 10;
     
-   @SuppressWarnings("unchecked")
    public ArrayStack() {
-      data = (E[]) new Object[DEFAULT_CAPACITY];
+      this(DEFAULT_CAPACITY);
+   }
+
+   @SuppressWarnings("unchecked")
+  public ArrayStack(int capacity) {
+      data = (E[]) new Object[capacity];
    }
    
    @Override
    public E pop() {
-      E result = data[top];
-      data[top--] = null;
-      return result;
+    if (isEmpty()) throw new EmptyStackException();
+    if (data.length >= 20 && size <= data.length / 4) resize(data.length / 2);
+    size = size - 1;
+    return data[size];
    }
 
    @Override
     public boolean isEmpty() {
-      return top == -1;
+      return size == 0;
     }
 
     @Override
     public E peek() {
-      return data[top];
+      return data[size - 1];
     }
 
     @Override
@@ -54,6 +60,26 @@ public class ArrayStack<E> implements Stack<E> {
         for (int i = 0; i < 9; i++) {
             s.push(i);
         }
+        System.out.println(s.size());
+        System.out.println(s.pop());
+        System.out.println(s.size());
+        System.out.println(s.peek());
+        Stack<Double> d = new ArrayStack<>();
+        for (int i = 0; i < 25; i++) {
+            d.push((double) i);
+        }
+        System.out.println(d.size());
+        System.out.println(d.pop());
+        System.out.println(d.size());
+        System.out.println(d.peek());
+        for (int i = 0; i < 22; i++) {
+            operators.push("Java"+i);
+        }
+        System.out.println(operators.size());
+        System.out.println(operators.pop());
+        System.out.println(operators.size());
+        System.out.println(operators.peek());
+
     }
 
 }
