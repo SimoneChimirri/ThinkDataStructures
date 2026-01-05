@@ -1,3 +1,0 @@
-public class ArrayQueue implements Queue{
-
-}
