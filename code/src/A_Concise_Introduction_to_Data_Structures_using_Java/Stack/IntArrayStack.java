@@ -1,30 +1,57 @@
 import java.util.EmptyStackException;
 
+//Listing 3.2
 public class IntArrayStack implements IntStack {
-   private int top = -1;
+   private int size = 0;
    private int[] data;
    private static final int DEFAULT_CAPACITY = 10;
    
    public IntArrayStack() {
-      data = new int[DEFAULT_CAPACITY];
+      this(DEFAULT_CAPACITY);
+   }
+
+   public IntArrayStack(int capacity){
+      data = new int[capacity];
    }
    
+   @Override
    public void push(int item) {
-      if (top == data.length - 1) resize(2 * data.length);
-      data[++top] = item;
+      if (size == data.length) resize(2 * data.length);
+      size = size + 1;
+      data[size - 1] = item;
    }
    
+   @Override
    public int pop() {
       if (isEmpty()) throw new EmptyStackException();
-      return data[top--];
+      if(size() <= data.length/4 && data.length >= 20) resize(data.length / 2);
+      size = size -1;
+      return data[size];
    }
    
    private void resize(int newCapacity) {
       int[] newData = new int[newCapacity];
-      for (int i = 0; i <= top; i++) {
+      for (int i = 0; i < size; i++) {
          newData[i] = data[i];
       }
+      System.out.println("The array has been resized to capacity: " + newCapacity);
       data = newData;
+   }
+
+   @Override
+   public boolean isEmpty() {
+      return size == 0;
+   }
+
+   @Override
+   public int peek() {
+      if(isEmpty()) throw new EmptyStackException();
+      return data[size - 1];
+   }
+
+   @Override
+   public int size() {
+      return size;
    }
    
    public static void main(String[] args) {
@@ -76,27 +103,32 @@ public class IntArrayStack implements IntStack {
       }
       s.push(100);
       System.out.println(s.pop());
-      System.out.println(s.peek());
+      //System.out.println(s.peek()); EmptyStackException
       while(!s.isEmpty()) {
          System.out.println(s.pop());
       }
-   }
+      System.out.println(s.size());
+      for (int i = 10; i < 50; i+=10) {
+         s.push(i);
+      }
 
-   @Override
-   public boolean isEmpty() {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
-   }
+      IntStack operands = new IntArrayStack();
+      operands.isEmpty();
+      operands.push(17);
+      operands.push(0);
+      operands.push(-12);
+      operands.push(101);
 
-   @Override
-   public int peek() {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'peek'");
-   }
+      for(int i=50; i < 360; i+=10){
+         s.push(i);
+      }
+      System.out.println(s.size());
+      System.out.println(s.isEmpty());
 
-   @Override
-   public int size() {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Unimplemented method 'size'");
+      for(int i=10; i < 360; i+=10){
+         s.pop();
+      }
+      System.out.println(s.size());
+      System.out.println(s.isEmpty());
    }
 }
