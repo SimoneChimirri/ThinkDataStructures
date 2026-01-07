@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Stack;
+
 public interface Stack<E> {
    boolean isEmpty();
    E peek();

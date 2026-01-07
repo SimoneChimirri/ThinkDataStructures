@@ -1,4 +1,6 @@
-public class LinkedQueue implements Queue{
+package AConciseIntroductionToDataStructuresUsingJava.Stack;
+
+/**public class LinkedQueue implements Queue{
 
     public static void main(String[] args) {
         Queue q1 = new ArrayQueue();
@@ -19,3 +21,4 @@ public class LinkedQueue implements Queue{
 
 
 }
+ */

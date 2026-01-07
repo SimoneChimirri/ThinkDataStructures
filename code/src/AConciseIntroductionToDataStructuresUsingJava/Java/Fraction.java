@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Java;
+
 // Listing 1.5
 public class Fraction {
    private int num;

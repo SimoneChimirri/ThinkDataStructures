@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Queue;
+
 public class LinkedMap<K,V> implements Map<K, V> {
 
     @Override

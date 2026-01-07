@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Java;
+
 public class NumericFunctions {
    // Listing 1.1
    public static long factorial(long n) {

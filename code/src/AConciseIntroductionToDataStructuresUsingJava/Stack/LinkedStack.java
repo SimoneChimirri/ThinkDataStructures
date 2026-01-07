@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Stack;
+
 import java.util.EmptyStackException;
 
 public class LinkedStack<E> implements Stack<E> {

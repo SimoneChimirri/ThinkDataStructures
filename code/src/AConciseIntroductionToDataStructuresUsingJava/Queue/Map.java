@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Queue;
+
 public interface Map<K,V> {
 
     public void put(K key, V value);

@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Java;
+
 public class StringFunctions {
    // Listing 1.2
    public static int count(String s, String target) {

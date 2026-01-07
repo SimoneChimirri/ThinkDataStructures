@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Queue;
+
 public class ArrayQueue1<E> implements Queue1<E> {
 
     @Override

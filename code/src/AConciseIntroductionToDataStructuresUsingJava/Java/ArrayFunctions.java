@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Java;
+
 import java.util.Random;
 
 public class ArrayFunctions {

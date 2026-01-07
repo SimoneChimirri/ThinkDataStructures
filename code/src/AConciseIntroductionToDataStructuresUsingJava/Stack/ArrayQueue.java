@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Stack;
+
 public class ArrayQueue implements Queue2{
 
     @Override
