@@ -3,8 +3,9 @@ package AConciseIntroductionToDataStructuresUsingJava.Stack;
 import java.util.EmptyStackException;
 
 public class ArrayStack<E> implements Stack<E> {
-   private E[] data;
-   private int size;
+   protected E[] data;
+   protected int size;
+   protected int capacity;
    private static final int DEFAULT_CAPACITY = 10;
     
    public ArrayStack() {
@@ -14,6 +15,7 @@ public class ArrayStack<E> implements Stack<E> {
    @SuppressWarnings("unchecked")
   public ArrayStack(int capacity) {
       data = (E[]) new Object[capacity];
+      this.capacity = capacity;
    }
    
    @Override
@@ -36,7 +38,7 @@ public class ArrayStack<E> implements Stack<E> {
 
     @Override
     public void push(E item) {
-      if (size == data.length) resize(2 * data.length);
+      //if (size == data.length) resize(2 * data.length);
       size = size + 1;
       data[size - 1] = item;
     }
