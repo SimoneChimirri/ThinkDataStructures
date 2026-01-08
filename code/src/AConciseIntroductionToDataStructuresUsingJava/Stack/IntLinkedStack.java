@@ -1,3 +1,5 @@
+package AConciseIntroductionToDataStructuresUsingJava.Stack;
+
 import java.util.EmptyStackException;
 
 //Listing 3.4

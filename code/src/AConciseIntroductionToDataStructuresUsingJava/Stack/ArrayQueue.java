@@ -12,4 +12,14 @@ public class ArrayQueue implements Queue2{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public int peek() {
+        return 0;
+    }
+
+    @Override
+    public boolean size() {
+        return false;
+    }
+
 }
