@@ -12,11 +12,11 @@ public class ArrayList<E> implements List1<E> {
     }
 
     @Override
-    public void add(int index, E item) {
+    public void add(int index, E item) { // complexity-time is linear - O(n)
         if (index < 0 || index > size)
             throw new IndexOutOfBoundsException();
         if (size == data.length) resize(2 * data.length);
-        // shift right to make space
+        // shift right to close gap
         for (int i = size - 1; i >= index; i--) {
             data[i + 1] = data[i];
         }
@@ -25,7 +25,7 @@ public class ArrayList<E> implements List1<E> {
     }
 
     @Override
-    public void add(E item){
+    public void add(E item){ // complexity-time is constant - O(1)
         if (size == data.length) resize(2 * data.length);
         data[size] = item;
         size++;
@@ -40,7 +40,7 @@ public class ArrayList<E> implements List1<E> {
     }
 
     @Override
-    public E removeAt(int index){
+    public E removeAt(int index){ // complexity-time is linear - O(n)
         if (index < 0 || index > size)
             throw new IndexOutOfBoundsException();
         if(data.length >= 20 && size < data.length/4) resize(data.length / 2);
@@ -55,19 +55,23 @@ public class ArrayList<E> implements List1<E> {
     }
 
     @Override
-    public E set(int index, E item){
+    public E set(int index, E item){ // complexity-time is constant - O(1)
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
         E oldValue = data[index];
         data[index] = item;
         return oldValue;
     }
 
     @Override
-    public E get(int index){
+    public E get(int index){ // complexity-time is constant - O(1)
+        if (index < 0 || index > size)
+            throw new IndexOutOfBoundsException();
         return data[index];
     }
 
     @Override
-    public int indexOf(E item){
+    public int indexOf(E item){ // complexity-time is linear - O(n)
         for(int i=0; i < size; i++){
             if(data[i] != null && data[i].equals(item)) return i;
         }
@@ -75,8 +79,22 @@ public class ArrayList<E> implements List1<E> {
     }
 
     @Override
-    public int size(){
+    public int size(){ // complexity-time is constant - O(1)
         return this.size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(E item : data) {
+            if(item != null) builder.append(item.toString()).append("\n");
+        }
+        return builder.toString();
     }
 
     public static void main(String[] args) {
@@ -130,5 +148,33 @@ public class ArrayList<E> implements List1<E> {
         for (int i=9; i >= 0; i--){
             b.add(i);
         }
+        System.out.println("The elements of list b are:");
+        System.out.println(b.toString());
+
+        ArrayList<Double> doubleItems = new ArrayList<>(50);
+        doubleItems.add(1.0);
+        System.out.println(doubleItems.set(0, 2.0));
+        doubleItems.add(3.0);
+        System.out.println(doubleItems.set(0,4.0));
+        System.out.println(doubleItems.set(1,5.0));
+        doubleItems.add(6.0);
+        System.out.println(doubleItems.removeAt(1));
+        System.out.println(doubleItems.get(1));
+
+        ArrayList<String> stringItems = new ArrayList<>(50);
+        stringItems.add("Python");
+        stringItems.add(0,"PHP");
+        stringItems.add(1,"C");
+        stringItems.add(0,"Ruby");
+        stringItems.add(2,"Javascript");
+        System.out.println(stringItems.indexOf("Java"));
+        System.out.println(stringItems.indexOf("Python"));
+        System.out.println(stringItems.indexOf("Go"));
+
+        System.out.println("The elements of list doubleItems are:");
+        System.out.println(doubleItems.toString());
+
+        System.out.println("The elements of list stringItems are:");
+        System.out.println(stringItems.toString());
     }
 }
