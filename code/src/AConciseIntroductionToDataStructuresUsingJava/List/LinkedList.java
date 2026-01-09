@@ -1,6 +1,9 @@
 package AConciseIntroductionToDataStructuresUsingJava.List;
 
-public class LinkedList<E> implements List1<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<E> implements List1<E>{
     private Node<E> head = new Node<>();
     //private Node<E> next = new Node<>(null, null, head);
     private int size = 0;
@@ -103,6 +106,55 @@ public class LinkedList<E> implements List1<E> {
         return p;
     }
 
+    public Iterator<E> iterator() {
+        return new LinkedListIterator<>();
+    }
+
+    // For LinkedList class, Listing 6.3
+    @SuppressWarnings("unchecked")
+    private class LinkedListIterator<P> implements Iterator<P> {
+        private Node<P> next = (Node<P>) head.next;// skip dummy
+
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        public P next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            P result = next.data;
+            next = next.next;
+            return result;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        public P removeAt(int index) {
+            if (index < 0 || index >= size)
+                throw new IndexOutOfBoundsException();
+            Node<P> p = getNode(index);
+            P result = p.data;
+            p.prev.next = next;
+            if (next != null) p.next.prev = p.prev;
+            size--;
+            return result;
+        }
+
+        private Node<P> getNode(int index) {
+            // assumes -1 <= index < size.  -1 is dummy.
+            Node<P> p = (Node<P>) head;
+            for (int i = -1; i < index; i++) {
+                p = p.next;
+            }
+            return p;
+        }
+
+        public static void main(String[] args) {
+            //for(Node<T> p = head; p != null; p = p.next)
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -159,5 +211,13 @@ public class LinkedList<E> implements List1<E> {
         System.out.println("The String list is:");
         System.out.println(stringLinked);
 
+        LinkedList<Integer> items = new LinkedList<>();
+        Iterator<Integer> it = items.iterator();
+        while(it.hasNext()) System.out.println(it.next());
+        for (Integer item : items) System.out.println(item);
+
+        Iterator<String> str = stringLinked.iterator();
+        while(str.hasNext()) System.out.println(str.next());
+        for (String s : stringLinked) System.out.println(s);
     }
 }

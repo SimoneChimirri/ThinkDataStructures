@@ -1,6 +1,6 @@
 package AConciseIntroductionToDataStructuresUsingJava.List;
 
-public interface List1<E> {
+public interface List1<E> extends Iterable<E>{
 
     public void add(E item);
     public void add(int index, E item);

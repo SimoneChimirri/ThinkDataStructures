@@ -1,5 +1,7 @@
 package AConciseIntroductionToDataStructuresUsingJava.List;
 
+import java.util.Iterator;
+
 // For ArrayList class, Listing 6.1
 public class ArrayList<E> implements List1<E> {
 
@@ -176,5 +178,34 @@ public class ArrayList<E> implements List1<E> {
 
         System.out.println("The elements of list stringItems are:");
         System.out.println(stringItems.toString());
+
+        for (String item : stringItems) {
+            System.out.println(item);
+        }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayListIterator<>();
+    }
+
+    @SuppressWarnings("unchecked")
+    private class ArrayListIterator<T> implements Iterator<T> {
+        private int current = -1;
+
+        @Override
+        public boolean hasNext() {
+            return current != size() - 1;
+        }
+
+        @Override
+        public T next() {
+            return (T) data[++current];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
