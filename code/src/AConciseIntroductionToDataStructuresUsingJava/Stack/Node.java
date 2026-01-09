@@ -12,14 +12,14 @@ package AConciseIntroductionToDataStructuresUsingJava.Stack;// Listing 3.3
 
 //Generic version for Listing 4.1
 
-public class Node<T> {
-   private T data;
-   private Node<T> next;
-   
-   public Node(T data, Node<T> next) {
-      this.data = data;
-      this.next = next;
-   }
+    public class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        public Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+    }
 
    public static void main(String[] args) {
       Node<Integer> p = new Node<>(34, null);
