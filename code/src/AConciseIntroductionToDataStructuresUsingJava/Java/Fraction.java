@@ -1,7 +1,7 @@
 package AConciseIntroductionToDataStructuresUsingJava.Java;
 
 // Listing 1.5
-public class Fraction {
+public class Fraction implements Comparable<Fraction> {
    private int num;
    private int den;
    
@@ -79,6 +79,11 @@ public class Fraction {
    public String toString() {
       return num + "/" + den;
    }
+
+    @Override
+    public int compareTo(Fraction other) {
+        return Double.compare((double) num / (double) den, (double) other.num / (double) other.den);
+    }
    
    public static void main(String[] args) {
       Fraction f1 = new Fraction(3, 4);
@@ -110,4 +115,5 @@ public class Fraction {
       System.out.print(f1 + " / " + f2 + " = ");
       System.out.println(divide(f1, f2));
    }
+
 }
