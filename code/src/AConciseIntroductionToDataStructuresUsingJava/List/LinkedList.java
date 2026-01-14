@@ -1,10 +1,12 @@
 package AConciseIntroductionToDataStructuresUsingJava.List;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Linked1;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E> implements List1<E>{
-    private Node<E> head = new Node<>();
+public class LinkedList<E> extends Linked1<E> implements List1<E>{
+    //private Node<E> head = new Node<>();
     //private Node<E> next = new Node<>(null, null, head);
     private int size = 0;
 

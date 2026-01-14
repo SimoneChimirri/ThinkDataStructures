@@ -1,9 +1,11 @@
 package AConciseIntroductionToDataStructuresUsingJava.List;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Array1;
+
 import java.util.Iterator;
 
 // For ArrayList class, Listing 6.1
-public class ArrayList<E> implements List1<E> {
+public class ArrayList<E> extends Array1<E> implements List1<E> {
 
     private int size = 0;
     private E[] data;

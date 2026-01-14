@@ -1,8 +1,10 @@
 package AConciseIntroductionToDataStructuresUsingJava.Stack;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Array1;
+
 import java.util.EmptyStackException;
 
-public class ArrayStack<E> implements Stack<E> {
+public class ArrayStack<E> extends Array1<E> implements Stack<E> {
    protected E[] data;
    protected int size;
    protected int capacity;

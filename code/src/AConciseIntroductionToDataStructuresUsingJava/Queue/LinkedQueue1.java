@@ -1,8 +1,10 @@
 package AConciseIntroductionToDataStructuresUsingJava.Queue;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Linked1;
+
 import java.util.NoSuchElementException;
 
-public class LinkedQueue1<E> implements Queue1<E>{
+public class LinkedQueue1<E> extends Linked1<E> implements Queue1<E>{
 
     private int size = 0;
     private Node<E> front = new Node<>();

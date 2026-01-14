@@ -1,8 +1,10 @@
 package AConciseIntroductionToDataStructuresUsingJava.Stack;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Linked1;
+
 import java.util.EmptyStackException;
 
-public class LinkedStack<E> implements Stack<E> {
+public class LinkedStack<E> extends Linked1<E> implements Stack<E> {
    private Node<E> top;
    private int size = 0;
 

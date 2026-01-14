@@ -1,8 +1,10 @@
 package AConciseIntroductionToDataStructuresUsingJava.Queue;
 
+import AConciseIntroductionToDataStructuresUsingJava.Tree.Array1;
+
 import java.util.NoSuchElementException;
 
-public class ArrayQueue1<E> implements Queue1<E> {
+public class ArrayQueue1<E> extends Array1<E> implements Queue1<E> {
 
     protected int size = 0;
     protected int capacity;
