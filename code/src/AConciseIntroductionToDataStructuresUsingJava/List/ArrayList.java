@@ -8,7 +8,6 @@ import java.util.Iterator;
 public class ArrayList<E> extends Array1<E> implements List1<E> {
 
     private int size = 0;
-    private E[] data;
 
     @SuppressWarnings("unchecked")
     public ArrayList(int capacity) {
@@ -35,8 +34,9 @@ public class ArrayList<E> extends Array1<E> implements List1<E> {
         size++;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    private void resize(int newCapacity) {
+    protected void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
         if (size >= 0) System.arraycopy(data, 0, newData, 0, size);
         System.out.println("The array has been resized to capacity: " + newCapacity);

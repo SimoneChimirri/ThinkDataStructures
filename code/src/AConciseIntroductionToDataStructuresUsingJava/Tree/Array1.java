@@ -1,7 +1,7 @@
 package AConciseIntroductionToDataStructuresUsingJava.Tree;
 
 public abstract class Array1<E> {
-    E[] data;
+    protected E[] data;
     static final int DEFAULT_CAPACITY = 10;
 
     public Array1(){
@@ -13,7 +13,7 @@ public abstract class Array1<E> {
         this.data = (E[]) new Object[capacity];
     }
 
-    private void resize(int newCapacity){
+    protected void resize(int newCapacity){
 
     }
 

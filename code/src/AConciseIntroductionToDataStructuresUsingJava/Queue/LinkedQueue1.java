@@ -7,26 +7,10 @@ import java.util.NoSuchElementException;
 public class LinkedQueue1<E> extends Linked1<E> implements Queue1<E>{
 
     private int size = 0;
-    private Node<E> front = new Node<>();
+    private Node<E> front = head;
     private Node<E> rear = new Node<>();
 
-    private static class Node<T> {
-        private T data;
-        private Node<T> next;
 
-        private Node(T data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        private Node(T item){
-            this.data = item;
-            this.next = null;
-        }
-
-        private Node() {
-        }
-    }
 
     @Override
     public void enqueue(E e) { // O(1) - no loops

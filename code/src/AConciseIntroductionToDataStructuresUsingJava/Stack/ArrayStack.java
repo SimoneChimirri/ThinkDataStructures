@@ -5,7 +5,6 @@ import AConciseIntroductionToDataStructuresUsingJava.Tree.Array1;
 import java.util.EmptyStackException;
 
 public class ArrayStack<E> extends Array1<E> implements Stack<E> {
-   protected E[] data;
    protected int size;
    protected int capacity;
    private static final int DEFAULT_CAPACITY = 10;
@@ -40,7 +39,7 @@ public class ArrayStack<E> extends Array1<E> implements Stack<E> {
 
     @Override
     public void push(E item) {
-      //if (size == data.length) resize(2 * data.length);
+      if (size == data.length) resize(2 * data.length);
       size = size + 1;
       data[size - 1] = item;
     }
@@ -50,8 +49,9 @@ public class ArrayStack<E> extends Array1<E> implements Stack<E> {
         return size;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    private void resize(int newCapacity) {
+    protected void resize(int newCapacity) {
       E[] newData = (E[]) new Object[newCapacity];
       System.arraycopy(data, 0, newData, 0, size);
       System.out.println("The array has been resized to capacity: " + newCapacity);

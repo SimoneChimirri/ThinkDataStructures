@@ -5,20 +5,10 @@ import AConciseIntroductionToDataStructuresUsingJava.Tree.Linked1;
 import java.util.EmptyStackException;
 
 public class LinkedStack<E> extends Linked1<E> implements Stack<E> {
-   private Node<E> top;
+   private Node<E> top = head;
    private int size = 0;
 
    // use E here
-   
-   private static class Node<T> {
-      private T data;
-      private Node<T> next;
-
-      private Node(T data, Node<T> next) {
-         this.data = data;
-         this.next = next;
-      }
-   }
 
    @Override
    public boolean isEmpty() {

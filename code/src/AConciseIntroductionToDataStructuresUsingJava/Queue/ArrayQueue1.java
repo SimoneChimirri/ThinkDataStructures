@@ -8,7 +8,6 @@ public class ArrayQueue1<E> extends Array1<E> implements Queue1<E> {
 
     protected int size = 0;
     protected int capacity;
-    protected E[] data;
     private static final int DEFAULT_CAPACITY = 10;
 
     public ArrayQueue1() {
@@ -28,8 +27,9 @@ public class ArrayQueue1<E> extends Array1<E> implements Queue1<E> {
         size++;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    private void resize(int newCapacity) {
+    protected void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity];
         System.arraycopy(data, 0, newData, 0, size);
         System.out.println("The array has been resized to capacity: " + newCapacity);

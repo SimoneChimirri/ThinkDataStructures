@@ -6,27 +6,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedList<E> extends Linked1<E> implements List1<E>{
-    private Node<E> head = new Node<>();
     //private Node<E> next = new Node<>(null, null, head);
     private int size = 0;
-
-    private static class Node<T> {
-        private T data;
-        private Node<T> next;
-        private Node<T> prev;
-
-        public Node() {
-            this.data = null;
-            this.next = null;
-            this.prev = null;
-        }
-
-        public Node(T data, Node<T> next, Node<T> prev) {
-            this.data = data;
-            this.next = next;
-            this.prev = prev;
-        }
-    }
 
     @Override
     public void add(E item) { // complexity-time is linear - O(n)
