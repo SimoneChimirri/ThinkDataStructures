@@ -20,14 +20,23 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         if(size == capacity) resize(capacity*2);
         data[size] = item;
         size++;
-        heapifyUp(size() -1);
+        heapifyUpIterative(size() -1);
     }
 
-    private void heapifyUp(int index) {
+    private void heapifyUp(int index) { //O(n)
         if(!isValid(index) || !isValid(parent(index))) return;
         if(isHigher(index,parent(index))){
             swap(index,parent(index));
             heapifyUp(parent(index));
+        }
+    }
+
+    private void heapifyUpIterative(int index){ //O(n)
+        if(!isValid(index) || !isValid(parent(index))) return;
+        while(isHigher(index,parent(index))){
+            swap(index,parent(index));
+            index = parent(index);
+            if(!isValid(parent(index))) return;
         }
     }
 
@@ -39,11 +48,63 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         data[size()-1] = null;
         size--;
         if(size <= capacity/4 && capacity >= 20) resize(capacity/2);
+        heapifyDown(0);
         return itemRemoved;
     }
 
-    private void heapifyDown(int index){
+    private void heapifyDown(int index){ //O(log n)
         if(!isValid(index) || (!isValid(left(index)) && !isValid(right(index)))) return;
+        if (isValid(left(index)) && isValid(right(index))) {
+            if (isHigher(left(index), right(index))){
+                if(isHigher(left(index), index)) {
+                    swap(index, left(index));
+                    index = left(index);
+                    heapifyDown(index);
+                }
+            }else {
+                if (isHigher(right(index), index)) {
+                    swap(index, right(index));
+                    index = right(index);
+                    heapifyDown(index);
+                }
+            }
+        } else if (isValid(left(index)) && isHigher(left(index), index)) {
+            swap(index, left(index));
+            index = left(index);
+            heapifyDown(index);
+        } else if (isValid(right(index)) && isHigher(right(index), index)) {
+            swap(index, right(index));
+            index = right(index);
+            heapifyDown(index);
+        }
+    }
+
+    private void heapifyDownIterative(int index){
+        if(!isValid(index) || (!isValid(left(index)) && !isValid(right(index)))) return;
+        boolean swap = true;
+        while(swap) {
+            if (isValid(left(index)) && isValid(right(index))) {
+                if (isHigher(left(index), right(index))){
+                    if(isHigher(left(index), index)) {
+                        swap(index, left(index));
+                        index = left(index);
+                    }else swap = false;
+                }else {
+                    if (isHigher(right(index), index)) {
+                        swap(index, right(index));
+                        index = right(index);
+                    } else swap = false;
+                }
+            } else if (isValid(left(index)) && isHigher(left(index), index)) {
+                swap(index, left(index));
+                index = left(index);
+                if (!isValid(index)) break;
+            } else if (isValid(right(index)) && isHigher(right(index), index)) {
+                swap(index, right(index));
+                index = right(index);
+                if (!isValid(index)) break;
+            } else break;
+        }
     }
 
     @Override
@@ -66,26 +127,26 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         MaxHeap<Integer> pqa = new MaxHeap<>();
         pqa.add(5);
         pqa.add(8);
-        pqa.peek();
+        System.out.println(pqa.peek());
         pqa.add(3);
-        pqa.remove();
+        System.out.println(pqa.remove());
         pqa.add(10);
-        pqa.size();
+        System.out.println(pqa.size());
         pqa.add(4);
-        pqa.remove();
-        pqa.remove();
+        System.out.println(pqa.remove());
+        System.out.println(pqa.remove());
 
         MaxHeap<Integer> pqb = new MaxHeap<>();
         pqb.add(10);
         pqb.add(20);
         pqb.add(30);
         pqb.add(40);
-        pqb.peek();
+        System.out.println(pqb.peek());
         pqb.add(50);
-        pqb.remove();
-        pqb.size();
-        pqb.remove();
-        pqb.remove();
+        System.out.println(pqb.remove());
+        System.out.println(pqb.size());
+        System.out.println(pqb.remove());
+        System.out.println(pqb.remove());
         
         MaxHeap<Integer> pqc = new MaxHeap<>(20);
         pqc.add(37);
@@ -97,6 +158,7 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         pqc.add(8);
         pqc.add(83);
         pqc.add(41);
+        System.out.println(pqc);
 
         MaxHeap<Integer> pqd = new MaxHeap<>(20);
         pqd.add(62);
@@ -142,7 +204,8 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         System.out.println(pqf.remove());
         System.out.println(pqf.remove());
         System.out.println(pqf);
-
+        while(!pqf.isEmpty()) System.out.println(pqf.remove());
+        System.out.println(pqf);
 
     }
 }
