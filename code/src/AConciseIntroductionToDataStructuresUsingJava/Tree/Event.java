@@ -12,11 +12,7 @@ public abstract class Event implements Comparable<Event> {
     }
 
     public Event(double time) {
-        Random gen = new Random();
-        double u = gen.nextDouble();
-        double lambda = Math.max(0.1, 0.5 + gen.nextGaussian() * 0.5);
-        this.time = time - lambda * Math.log(u);
-        this.customer = new Customer();
+        this.time = time;
     }
 
     @Override
