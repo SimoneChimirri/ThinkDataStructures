@@ -12,6 +12,24 @@ public class MinHeap<E extends Comparable<? super E>> extends Heap<E>{
     @SuppressWarnings("unchecked")
     public MinHeap(int capacity){
         data = (E[]) new Comparable[capacity];
+        this.capacity = capacity;
+    }
+
+    @SuppressWarnings("unchecked")
+    public MinHeap(E[] items){
+        if(items.length == 0) return;
+        data = (E[]) new Comparable[items.length];
+        capacity = items.length;
+        buildHeap(items);
+    }
+
+    private void buildHeap(E[] items) {
+        for(E item : items){
+            data[size++] = item;
+        }
+        for(int i=size()-1; i >= 0; i--){
+            if(isValid(left(i)) && isValid(right(i))) heapifyDown(i);
+        }
     }
 
     @Override
@@ -25,7 +43,10 @@ public class MinHeap<E extends Comparable<? super E>> extends Heap<E>{
 
     @Override
     public void add(E item) {
-        if(size == capacity) resize(capacity*2);
+        if(size == capacity){
+            resize(capacity*2);
+            capacity *= 2;
+        }
         data[size] = item;
         size++;
         heapifyUp(size() -1);
@@ -46,7 +67,10 @@ public class MinHeap<E extends Comparable<? super E>> extends Heap<E>{
         E itemRemoved = data[size()-1];
         data[size()-1] = null;
         size--;
-        if(size <= capacity/4 && capacity >= 20) resize(capacity/2);
+        if(size <= capacity/4 && capacity >= 20){
+            resize(capacity/2);
+            capacity = capacity/2;
+        }
         heapifyDown(0);
         return itemRemoved;
     }
@@ -76,6 +100,18 @@ public class MinHeap<E extends Comparable<? super E>> extends Heap<E>{
             index = right(index);
             heapifyDown(index);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<? super T>> T[] heapSort(T[] items){ // O(n log n)
+        MinHeap<T> minHeap = new MinHeap<>(items);
+        T[] newItems = (T[]) new Comparable[items.length];
+        while(!minHeap.isEmpty()){
+            for(int i=0; i < newItems.length; i++){
+                newItems[i] = minHeap.remove();
+            }
+        };
+        return newItems;
     }
 
     @Override
@@ -166,6 +202,24 @@ public class MinHeap<E extends Comparable<? super E>> extends Heap<E>{
         System.out.println(pqf.remove());
         System.out.println(pqf.remove());
         System.out.println(pqf);
+        while(!pqf.isEmpty()) System.out.println(pqf.remove());
+        System.out.println(pqf);
 
+        Integer[] items = {31,30,36,5,72,8,76,18,44};
+        MinHeap<Integer> pqg = new MinHeap<>(items);
+        System.out.println(pqg);
+
+        MinHeap<Integer> pqh = new MinHeap<>(20);
+        pqh.add(38);
+        pqh.add(42);
+        pqh.add(24);
+        pqh.add(17);
+        pqh.add(81);
+        pqh.add(8);
+        pqh.add(78);
+        System.out.println(pqh);
+        System.out.println(pqh.lastNodeParent());
+        Integer[] heapArray = {38,42,24,17,81,8,78};
+        System.out.println(Arrays.toString(heapSort(heapArray)));
     }
 }

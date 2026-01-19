@@ -12,7 +12,7 @@ public class ArrayFunctions {
     }
 
     // Listing 2.1
-    public static void insertionSort(int[] data) {
+    public static void insertionSort(int[] data) { // O(n^2) - complexity-time is quadratic
         for (int i = 1; i < data.length; i++) {
             int key = data[i];
             int j = i - 1;

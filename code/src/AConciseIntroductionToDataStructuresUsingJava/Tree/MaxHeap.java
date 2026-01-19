@@ -1,6 +1,7 @@
 package AConciseIntroductionToDataStructuresUsingJava.Tree;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
@@ -15,15 +16,35 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         this.capacity = capacity;
     }
 
+    @SuppressWarnings("unchecked")
+    public MaxHeap(E[] items){
+        if(items.length == 0) return;
+        data = (E[]) new Comparable[items.length];
+        capacity = items.length;
+        buildHeap(items);
+    }
+
+    private void buildHeap(E[] items) {
+        for(E item : items){
+            data[size++] = item;
+        }
+        for(int i=size()-1; i >= 0; i--){
+            if(isValid(left(i)) && isValid(right(i))) heapifyDown(i);
+        }
+    }
+
     @Override
     public void add(E item) {
-        if(size == capacity) resize(capacity*2);
+        if(size == capacity){
+            resize(capacity*2);
+            capacity *= 2;
+        }
         data[size] = item;
         size++;
         heapifyUpIterative(size() -1);
     }
 
-    private void heapifyUp(int index) { //O(n)
+    private void heapifyUp(int index) { //O(log n)
         if(!isValid(index) || !isValid(parent(index))) return;
         if(isHigher(index,parent(index))){
             swap(index,parent(index));
@@ -31,7 +52,7 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         }
     }
 
-    private void heapifyUpIterative(int index){ //O(n)
+    private void heapifyUpIterative(int index){ //O(log n)
         if(!isValid(index) || !isValid(parent(index))) return;
         while(isHigher(index,parent(index))){
             swap(index,parent(index));
@@ -47,7 +68,10 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         E itemRemoved = data[size()-1];
         data[size()-1] = null;
         size--;
-        if(size <= capacity/4 && capacity >= 20) resize(capacity/2);
+        if(size <= capacity/4 && capacity >= 20){
+            resize(capacity/2);
+            capacity=capacity/2;
+        }
         heapifyDown(0);
         return itemRemoved;
     }
@@ -79,7 +103,7 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         }
     }
 
-    private void heapifyDownIterative(int index){
+    private void heapifyDownIterative(int index){ //O(log n)
         if(!isValid(index) || (!isValid(left(index)) && !isValid(right(index)))) return;
         boolean swap = true;
         while(swap) {
@@ -114,6 +138,18 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
 
     private boolean isLarger(int i, int j){
         return data[i].compareTo(data[j]) > 0;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<? super T>> T[] heapSort(T[] items){ // O(n log n)
+        MaxHeap<T> maxHeap = new MaxHeap<>(items);
+        T[] newItems = (T[]) new Comparable[items.length];
+        while(!maxHeap.isEmpty()){
+            for(int i=0; i < newItems.length; i++){
+                newItems[i] = maxHeap.remove();
+            }
+        };
+        return newItems;
     }
 
     @Override
@@ -206,6 +242,23 @@ public class MaxHeap<E extends Comparable<? super E>> extends Heap<E>{
         System.out.println(pqf);
         while(!pqf.isEmpty()) System.out.println(pqf.remove());
         System.out.println(pqf);
+
+        Integer[] items = {31,30,36,5,72,8,76,18,44};
+        MaxHeap<Integer> pqg = new MaxHeap<>(items);
+        System.out.println(pqg);
+
+        MaxHeap<Integer> pqh = new MaxHeap<>(20);
+        pqh.add(38);
+        pqh.add(42);
+        pqh.add(24);
+        pqh.add(17);
+        pqh.add(81);
+        pqh.add(8);
+        pqh.add(78);
+        System.out.println(pqh);
+        System.out.println(pqh.lastNodeParent());
+        Integer[] heapArray = {38,42,24,17,81,8,78};
+        System.out.println(Arrays.toString(heapSort(heapArray)));
 
     }
 }

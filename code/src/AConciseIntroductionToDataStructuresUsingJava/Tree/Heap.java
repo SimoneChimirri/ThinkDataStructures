@@ -11,23 +11,23 @@ public abstract class Heap<E extends Comparable<? super E>> implements PriorityQ
 
 
     @Override
-    public void add(E item) {
+    public void add(E item) { // O(log n) - O(1) if the heap is empty
 
     }
 
     @Override
-    public E remove() {
+    public E remove() { // O(log n)
         return null;
     }
 
     @Override
-    public E peek() {
+    public E peek() { // O(1)
         if(isEmpty()) throw new NoSuchElementException();
         return data[0];
     }
 
     @Override
-    public int size() {
+    public int size() { // O(1)
         return this.size;
     }
 
@@ -54,6 +54,10 @@ public abstract class Heap<E extends Comparable<? super E>> implements PriorityQ
         return -1;
     }
 
+    protected int lastNodeParent(){
+        return parent(size()-1);
+    }
+
     protected void swap(int i, int j){
         E temp = data[i];
         data[i] = data[j];
@@ -69,7 +73,7 @@ public abstract class Heap<E extends Comparable<? super E>> implements PriorityQ
     }
 
     @Override
-    public boolean isEmpty() {
+    public boolean isEmpty() { // O(1)
         return size == 0;
     }
 
