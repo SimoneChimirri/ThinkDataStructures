@@ -5,12 +5,11 @@ public class Arrival extends Event{
     public Arrival(double time, Server server, Customer customer) {
         super(time);
         this.customer = customer;
-        process(server);
     }
 
     @Override
-    public void process(Server server) {
-        customer.setArriveTime();
-        server.serve(customer);
+    public void process(Server server, Simulator simulator) {
+        customer.setArriveTime(this.time);
+        server.serve(customer, this.time, simulator);
     }
 }

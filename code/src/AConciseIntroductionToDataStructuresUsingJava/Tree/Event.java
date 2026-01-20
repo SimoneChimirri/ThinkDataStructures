@@ -21,7 +21,7 @@ public abstract class Event implements Comparable<Event> {
         return (Double.compare(this.time, o.time));
     }
 
-    public abstract void process(Server server);
+    public abstract void process(Server server, Simulator simulator);
 
 
 }

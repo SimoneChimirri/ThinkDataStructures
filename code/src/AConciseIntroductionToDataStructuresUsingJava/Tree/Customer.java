@@ -18,11 +18,9 @@ public class Customer implements Comparable<Customer> {
         return arriveTime;
     }
 
-    public void setArriveTime() {
-        Random gen = new Random();
-        double u = gen.nextDouble();
-        double lambda = Math.max(0.1, 0.5 + gen.nextGaussian() * 0.5);
-        this.serviceTime = - lambda * Math.log(u);
+    public void setArriveTime(double arriveTime) {
+        this.arriveTime = arriveTime;
+
     }
 
     public double getServiceTime() {

@@ -4,14 +4,13 @@ public class Departure extends Event{
 
     Cashier cashier;
 
-    public Departure(double time, Cashier cashier, Server server) {
-        this.time = time;
+    public Departure(double time, Cashier cashier) {
+        super(time);
         this.cashier = cashier;
-        process(server);
     }
 
     @Override
-    public void process(Server server) {
-        server.clear(cashier,time);
+    public void process(Server server, Simulator simulator) {
+        server.clear(cashier, this.time, simulator);
     }
 }

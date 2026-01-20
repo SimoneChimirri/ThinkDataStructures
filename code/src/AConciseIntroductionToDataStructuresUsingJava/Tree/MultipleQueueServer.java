@@ -1,7 +1,5 @@
 package AConciseIntroductionToDataStructuresUsingJava.Tree;
 
-import java.util.Queue;
-
 public class MultipleQueueServer extends Server{
 
     private int cashierCount;
@@ -13,30 +11,29 @@ public class MultipleQueueServer extends Server{
     }
 
     @Override
-    public void serve(Customer customer) {
+    public void serve(Customer customer, double time, Simulator simulator) {
         int minIndex = -1;
         int minSize = Integer.MAX_VALUE;
         for (int i = 0; i < queues.length; i++) {
-            if (queues[i].size() < minSize && !(queues[i].isEmpty())) {
+            if (queues[i].size() < minSize) {
                 minSize = queues[i].size();
                 minIndex = i;
             }
         }
         if (minIndex != -1) {
-            if (queues[minIndex].isEmpty() && cashierArray[minIndex].getCurrentCustomer() == null)
-            {
-                assign(customer, cashierArray[minIndex], customer.getArriveTime());
-            } else{
+            if (queues[minIndex].isEmpty() && cashierArray[minIndex] != null && cashierArray[minIndex].getCurrentCustomer() == null) {
+                assign(customer, cashierArray[minIndex], time, simulator);
+            } else {
                 queues[minIndex].add(customer);
             }
-        }else {
-            cashierArray[0] = new Cashier();
-            assign(customer, cashierArray[0], customer.getArriveTime());
+        } else {
+            if(cashierArray[0] == null) cashierArray[0] = new Cashier();
+            assign(customer, cashierArray[0], time, simulator);
         }
     }
 
     @Override
-    public void clear(Cashier cashier, double time) {
+    public void clear(Cashier cashier, double time, Simulator simulator) {
         cashier.setCurrentCustomer(null);
         int cashierIndex = -1;
         for(int i = 0; i < cashierArray.length; i++) {
@@ -45,14 +42,14 @@ public class MultipleQueueServer extends Server{
                 break;
             }
         }
-        if(!(queues.length == 0) && !queues[cashierIndex].isEmpty()) {
+        if(cashierIndex != -1 && !(queues.length == 0) && !queues[cashierIndex].isEmpty()) {
             Customer nextCustomer = queues[cashierIndex].remove();
-            assign(nextCustomer, cashier, time);
+            //assign(nextCustomer, cashier, time, simulator);
         }
     }
 
     @Override
-    public void printStats() {
+    public int printStats() {
         System.out.println("Multiple Queue Server Stats:");
         int totalCustomers = 0;
         for (int i = 0; i < queues.length; i++) {
@@ -61,5 +58,6 @@ public class MultipleQueueServer extends Server{
             totalCustomers += queues[i].size();
         }
         System.out.println("Total customers in the queues: " + totalCustomers);
+        return totalCustomers;
     }
 }
