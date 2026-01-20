@@ -21,6 +21,19 @@ public class LinkedHashMap<K,V> implements Map<K,V> {
         dimension = m;
     }
 
+    private static class Entry<T,U>{
+        private T key;
+        private U value;
+
+        public Entry(T key, U value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Entry() {
+        }
+    }
+
     public V put(K key,V value){
         V oldValue = null;
         if(table[hash(key)] == null) table[hash(key)] = new LinkedMap<>();
@@ -245,6 +258,9 @@ public class LinkedHashMap<K,V> implements Map<K,V> {
         System.out.println(m2.get(26));
         System.out.println(m2.get(0));
         System.out.println(m2.get(17));
+
+
+
 
     }
 }
