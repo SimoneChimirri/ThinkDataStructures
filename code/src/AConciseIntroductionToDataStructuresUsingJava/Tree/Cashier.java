@@ -21,4 +21,8 @@ public class Cashier {
     public void setCurrentCustomer(Customer currentCustomer) {
         this.currentCustomer = currentCustomer;
     }
+
+    public double getEfficiencyRating() {
+        return efficiencyRating;
+    }
 }

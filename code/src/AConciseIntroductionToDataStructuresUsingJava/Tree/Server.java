@@ -6,7 +6,7 @@ public abstract class Server {
 
     public void assign(Customer customer, Cashier cashier, double time, Simulator simulator){
         cashier.setCurrentCustomer(customer);
-        double serviceTime = customer.getServiceTime();
+        double serviceTime = customer.getServiceTime() * cashier.getEfficiencyRating();
         double departureTime = time + serviceTime;
         Event departureEvent = new Departure(departureTime, cashier);
         simulator.addEvent(departureEvent);
