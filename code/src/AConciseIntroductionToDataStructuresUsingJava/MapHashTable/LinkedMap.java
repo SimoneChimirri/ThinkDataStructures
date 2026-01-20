@@ -161,6 +161,39 @@ public class LinkedMap<K,V> implements Map<K, V> {
         System.out.println(m1.get(2));
         System.out.println(m1.size());
         System.out.println(m1);
+
+        System.out.println("Java".hashCode());
+        System.out.println("table".hashCode());
+        System.out.println("data".hashCode());
+        System.out.println("Data".hashCode());
+
+        int studentId = 2087;
+        String departmentName = "Economy";
+        int courseNumber = 76;
+        int hashCode6 = studentId * 19;
+        for(int i=departmentName.length() - 1; i >= 0; i--){
+            hashCode6 += (int) (departmentName.charAt(i) * Math.pow(31,i));
+        }
+        hashCode6 += courseNumber * 37;
+        System.out.println(hashCode6);
+
+        int day = 29;
+        int month = 11;
+        int year = 2009;
+        int hashCode7 = day * 31 + month * 87 + year * (int) Math.pow(31,2);
+        System.out.println(hashCode7);
+
+        System.out.println(hashCode6 & Integer.MAX_VALUE);
+        System.out.println(hashCode7 & Integer.MAX_VALUE);
+        System.out.println(-1786546 & Integer.MAX_VALUE);
+        System.out.println(Math.abs(hashCode6));
+        System.out.println(Math.abs(hashCode7));
+        System.out.println(Math.abs(-1786546));
+        System.out.println(Math.abs(Integer.MAX_VALUE));
+        System.out.println(Math.abs(Integer.MIN_VALUE));//this value does not have a correspondent positive value
+                                                        //in the Integer range of values, so it returns a negative value,
+                                                        //itself.
+        System.out.println(Math.abs(Integer.MIN_VALUE+1));
     }
 
 }
