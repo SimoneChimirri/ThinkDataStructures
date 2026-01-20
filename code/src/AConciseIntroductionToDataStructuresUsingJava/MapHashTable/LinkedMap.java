@@ -68,7 +68,10 @@ public class LinkedMap<K,V> implements Map<K, V> {
         if(!containsKey(key)) return null;
         if(head.data.key.equals(key)){
             V oldValue = head.data.value;
-            head = head.next;
+            head.data.value = null;
+            head.data.key = null;
+            if(head.next!= null) head = head.next;
+            else head = null;
             size--;
             return oldValue;
         }
@@ -76,8 +79,11 @@ public class LinkedMap<K,V> implements Map<K, V> {
         while(current.next != null){
             if(current.next.data.key.equals(key)){
                 V oldValue = current.next.data.value;
-                current.next = current.next.next;
+                current.next.data.value = null;
+                current.next.data.key = null;
+                if(current.next.next != null) current.next = current.next.next;
                 current.next.next = null;
+                current.next = null;
                 size--;
                 return oldValue;
             }
