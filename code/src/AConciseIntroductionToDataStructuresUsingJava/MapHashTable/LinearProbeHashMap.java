@@ -21,13 +21,14 @@ public class LinearProbeHashMap<K,V> implements Map<K,V>{
     public V probe(K key, V value){
         if(key == null) return null;
         int i = hash(key);
-        int counter = size();
-        while(table[i] != null && !table[i].containsKey(key) && counter > 0){
+        int counter = dimension;
+        while(table[i] != null && !table[i].containsKey(key) && counter >= 0){
             i = (i+1)%dimension;
             counter--;
         }
         V oldValue = null;
-        if(counter != 0 && i != hash(key)) {
+        if(counter >= 0 || i == hash(key)){
+            if(table[i] == null) table[i] = new LinkedMap<>();
             oldValue = table[i].put(key, value);
             if(oldValue==null) size++;
         }
@@ -37,14 +38,15 @@ public class LinearProbeHashMap<K,V> implements Map<K,V>{
     public V delete(K key){
         if(key==null) return null;
         int index = hash(key);
-        int counter = size();
-        while(!table[index].containsKey(key) && counter > 0){//table[i] != null &&(to see)
+        int counter = dimension;
+        while((table[index] == null || !table[index].containsKey(key)) && counter >= 0){
             index = (index+1)%dimension;
             counter--;
         }
         V oldValue = null;
-        if(counter != 0 || index != hash(key)){
+        if(counter >= 0){
             oldValue = table[index].remove(key);
+            table[index] = null;
             size--;
         }
         return oldValue;
@@ -53,11 +55,27 @@ public class LinearProbeHashMap<K,V> implements Map<K,V>{
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        if(key == null) return false;
+        int index = hash(key);
+        int counter = dimension;
+        while((table[index] == null || !table[index].containsKey(key)) && counter >= 0){
+            if(table[index] == null) table[index] = new LinkedMap<>();
+            index = (index+1)%dimension;
+            counter--;
+        }
+        return table[index].containsKey(key);
     }
 
     @Override
     public V get(K key) {
+        if(key == null) return null;
+        int index = hash(key);
+        if(containsKey(key)){
+            while((table[index] == null || !table[index].containsKey(key))){
+                index = (index+1)%dimension;
+            }
+            if(table[index].containsKey(key)) return table[index].get(key);
+        }
         return null;
     }
 
@@ -181,6 +199,10 @@ public class LinearProbeHashMap<K,V> implements Map<K,V>{
         System.out.println(m1.put(56,56));
         System.out.println(m1.put(63,63));
         System.out.println(m1);
+        System.out.println(m1.get(69));
+        System.out.println(m1.get(26));
+        System.out.println(m1.get(17));
+        System.out.println(m1.get(0));
 
         //crescita del cluster in esplorazione lineare
         System.out.println(m1.hash(77));//0
